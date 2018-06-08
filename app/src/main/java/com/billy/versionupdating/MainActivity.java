@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements DownLoadUtils.Dow
 
     private static final String TAG = "MainActivity";
 
-    //    private String loadUrl = "http://gdown.baidu.com/data/wisegame/d2fbbc8e64990454/wangyiyunyinle_87.apk";
+
     private String filePath = Environment.getExternalStorageDirectory() + "/" + "111.apk";
 
     public TextView mTextView;

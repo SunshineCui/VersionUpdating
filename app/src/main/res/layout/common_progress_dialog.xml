@@ -41,10 +41,10 @@
                 android:id="@+id/progress_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_horizontal"
+                android:gravity="center"
+                android:padding="5dp"
                 android:text="4"
-                android:textColor="#eb2127"
+                android:textColor="#2E98FF"
                 android:textSize="15sp" />
 
             <TextView
@@ -53,10 +53,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="120px"
                 android:gravity="center_horizontal"
-                android:textColor="#eb2127"
+                android:textColor="#2E98FF"
                 android:textSize="30px"
                 android:visibility="gone" />
         </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>
