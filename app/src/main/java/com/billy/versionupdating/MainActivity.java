@@ -1,6 +1,5 @@
 package com.billy.versionupdating;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,16 +10,13 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.billy.versionupdating.dialog.CommonProgressDialog;
-import com.billy.versionupdating.utils.AppUtil;
 import com.billy.versionupdating.utils.DialogUtils;
 import com.billy.versionupdating.utils.DownLoadUtils;
-import com.billy.versionupdating.utils.SDCardUtils;
+import com.billy.versionupdating.utils.VersionUpdatingManager;
 
 import java.io.File;
 
@@ -35,24 +31,13 @@ public class MainActivity extends AppCompatActivity implements DownLoadUtils.Dow
     private DownLoadUtils mLoadUtils;
     private String mLoadUrl;
     private CommonProgressDialog mProgressDialog;
+    private VersionUpdatingManager versionUpdatingManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         mTextView = findViewById(R.id.textView);
-
-        //应该网络获取
-        int newVersionCode = 26;
-        int versionCode = AppUtil.getVersionCode(this);
-//        String loadUrl = "http://openbox.mobilem.360.cn/index/d/sid/3429345";//安装包下载地址 11.5M
-//        String loadUrl = "http://imtt.dd.qq.com/16891/47D8294B06AD9F31AC31BBC5574A1897.apk?fsname=com.syezon.wifi_3.6.5_248.apk&csr=1bbd";//6.6M
-        //22M
-        mLoadUrl = "http://imtt.dd.qq.com/16891/7AB0BD682763263FE543D4CCE6A66433.apk?fsname=com.qq.reader_6.6.2.689_110.apk&csr=1bbd";
-        Log.d(TAG, "onCreate ");
-        if (newVersionCode > versionCode && SDCardUtils.isSDCardExist()) {
-            //需要更新
-            mLoadUtils = new DownLoadUtils.Builder().mContext(this).loadUrl(mLoadUrl).filePath(filePath).mDownLoadListener(this).build();
-        }
+        versionUpdatingManager = new VersionUpdatingManager.Builder().mContext(this).build();
         super.onCreate(savedInstanceState);
         init();
     }
@@ -80,9 +65,7 @@ public class MainActivity extends AppCompatActivity implements DownLoadUtils.Dow
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                mProgressDialog = progressDialog();
-                mLoadUtils.download();
-                mProgressDialog.show();
+                versionUpdatingManager.init();
             }
         });
     }
