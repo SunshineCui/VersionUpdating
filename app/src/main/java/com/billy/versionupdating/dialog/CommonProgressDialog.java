@@ -33,11 +33,22 @@ public class CommonProgressDialog extends AlertDialog {
     private String TAG = "CommonProgressDialog";
     private String mProgressNumberFormat;
     private NumberFormat mProgressPercentFormat;
+    private static CommonProgressDialog commonProgressDialog;
 
-    public CommonProgressDialog(Context context) {
+    private CommonProgressDialog(Context context) {
         super(context);
         // TODO Auto-generated constructor stub
         initFormats();
+    }
+
+    public static CommonProgressDialog getInstance (Context context){
+        if (commonProgressDialog == null) {
+            commonProgressDialog = new CommonProgressDialog(context);
+        }
+        commonProgressDialog.setCancelable(false);
+        commonProgressDialog.setCanceledOnTouchOutside(false);
+        commonProgressDialog.setMessage("正在下载");
+        return commonProgressDialog;
     }
 
     @Override

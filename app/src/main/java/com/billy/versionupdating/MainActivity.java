@@ -89,15 +89,7 @@ public class MainActivity extends AppCompatActivity implements DownLoadUtils.Dow
 
 
     public CommonProgressDialog progressDialog() {
-        CommonProgressDialog cpd = new CommonProgressDialog(this);
-        cpd.setCancelable(false);
-        cpd.setCanceledOnTouchOutside(false);
-        cpd.setTitle("正在下载");
-        cpd.setCustomTitle(LayoutInflater.from(this).inflate(R.layout.title_dialog, null));
-        cpd.setMessage("正在下载");
-        cpd.setIndeterminate(true);
-        cpd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        return cpd;
+        return CommonProgressDialog.getInstance(this);
     }
 
     @Override
